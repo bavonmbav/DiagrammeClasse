@@ -1,0 +1,49 @@
+entity Contact {
+  firstName String,
+  lastName String,
+  email String,
+  phone String,
+  company String
+}
+
+entity Interaction {
+  type String,
+  date Instant,
+  description String,
+  notes String
+}
+
+entity Opportunity {
+  name String,
+  stage String,
+  amount BigDecimal,
+  closingDate Instant
+}
+
+entity Appointment {
+  date Instant,
+  notes String
+}
+
+entity Task {
+  title String,
+  description String,
+  dueDate Instant
+}
+
+entity User {
+  username String,
+  password String,
+  role String
+}
+
+relationship ManyToOne {
+  Interaction{contact} to Contact,
+  Opportunity{contact} to Contact,
+  Appointment{contact} to Contact
+}
+
+relationship ManyToOne {
+  Task{contact} to Contact
+}
+
