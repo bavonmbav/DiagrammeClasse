@@ -20,11 +20,12 @@ public class Opportunite {
     private Long membreId;
     @ManyToOne
     @JoinColumn(name = "contact_id")
-
     private Contact contact;
     private String titre;
     private String description;
     private BigDecimal montant;
+    @Enumerated(EnumType.STRING)
     private EtapeProgression etapeProgression;
+    @Enumerated(EnumType.STRING)
     private EtatOpportunite etat;
 }
