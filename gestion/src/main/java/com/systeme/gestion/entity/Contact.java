@@ -24,4 +24,5 @@ public class Contact {
     String  company;
     String  equipe;
     String category;
+
 }

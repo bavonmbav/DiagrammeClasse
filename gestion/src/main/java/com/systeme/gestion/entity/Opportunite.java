@@ -1,14 +1,12 @@
 package com.systeme.gestion.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.DecimalFormat;
 @Entity
@@ -19,11 +17,14 @@ import java.text.DecimalFormat;
 public class Opportunite {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String  name ;
-    String  stage;
-    DecimalFormat amount;
-    Date closingDate;
+    private Long membreId;
     @ManyToOne
+    @JoinColumn(name = "contact_id")
+
     private Contact contact;
+    private String titre;
+    private String description;
+    private BigDecimal montant;
+    private EtapeProgression etapeProgression;
+    private EtatOpportunite etat;
 }
