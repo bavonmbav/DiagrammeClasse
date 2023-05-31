@@ -13,6 +13,26 @@ import java.util.Objects;
 public class ContactImp implements ContactsServiceIT {
     @Autowired
     private ContactRepository repository;
+
+    public ContactImp(ContactRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Contact getContactById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+    //par groupe
+    @Override
+    public List<Contact> getContactsByGroup(String equipeName) {
+        return  repository.findByEquipe(equipeName);
+    }
+
+    @Override
+    public List<Contact> getContactsByCategory(String categoryName) {
+        return repository.findByCategory(categoryName);
+    }
+
     @Override
     public List<Contact> findByFirstName() {
         return  (List<Contact>)repository.findAll();
@@ -24,20 +44,14 @@ public class ContactImp implements ContactsServiceIT {
     @Override
     public Contact updateContactBy(Contact contact, long id){
         // complete le code
-        Contact existingDepartement = repository.findById(id).get();
-        if(Objects.nonNull(contact.getFirstName()) &&
-                !"".equalsIgnoreCase(contact.getFirstName())){
-            existingDepartement.setFirstName(contact.getFirstName());
+        Contact contacts = repository.findById(id).orElse(null);
+        if (contacts != null) {
+            contacts.setFirstName(contact.getFirstName());
+            contacts.setLastName(contact.getLastName());
+            // Set other properties as needed
+            return repository.save(contacts);
         }
-        if(Objects.nonNull(contact.getCompany()) &&
-                !"".equalsIgnoreCase(contact.getCompany())){
-            existingDepartement.setCompany(contact.getCompany());
-        }
-        if(Objects.nonNull(contact.getPhone()) &&
-                !"".equalsIgnoreCase(contact.getPhone())){
-            existingDepartement.setPhone(contact.getPhone());
-        }
-        return repository.save(existingDepartement);
+        return null;
     }
     @Override
     public void deleteContactBy(Long id){
