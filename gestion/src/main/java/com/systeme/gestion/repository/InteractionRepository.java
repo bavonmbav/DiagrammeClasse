@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface InteractionRepository extends CrudRepository<Interaction, Long> {
-
+    List<Interaction> findByContactId(Long contactId);
 }

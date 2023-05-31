@@ -10,14 +10,6 @@ import java.time.Instant;
 import java.util.List;
 
 public interface InteractionServiceIT {
-    List<Interaction> findByContact();
-//    List<Interaction> findByType(String type);
-//    List<Interaction> findByDateBetween(Instant startDate, Instant endDate);
-//    List<Interaction> getInteractionHistory(Contact contact);
-
-    public void deleteInteraction(Long id);
-    public void addNotesToInteraction(Interaction interaction, String notes);
-    public void addDocumentToInteraction(Interaction interaction, Document document) ;
-    public void addContactToInteraction(Interaction interaction, Contact contact) ;
-    public void addInteraction(Interaction interaction);
+    void enregistrerInteraction(Interaction interaction);
+    List<Interaction> getHistoriqueInteractions(Long contact);
 }

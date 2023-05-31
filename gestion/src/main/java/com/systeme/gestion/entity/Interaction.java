@@ -1,16 +1,15 @@
 package com.systeme.gestion.entity;
 
-import com.systeme.gestion.implement.Document;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 @Entity
 @Builder
 @Data
@@ -19,15 +18,13 @@ import java.sql.Date;
 public class Interaction {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String  type ;
-    Date date ;
-    String  description;
-    String  notes;
-    
+    private Long id;
+    private  String  type ;
+    private String  description;
+    private String  notes;
+    private String details;
+    private LocalDateTime timestamp;
     @ManyToOne
+    @JoinColumn(name = "contact_id")
     private Contact contact;
-
-    public void setDocument(Document document) {
-    }
 }
