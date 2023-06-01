@@ -1,14 +1,13 @@
 package com.systeme.gestion.entity;
 
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import java.sql.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -18,11 +17,18 @@ import java.sql.Date;
 public class Tache {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String  title;
-    String description;
-    Date dueDate;
+    private Long id;
+
+    private String nom;
+
+    private String descriptions;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime timestamp;
+
+    private boolean completed;
 
     @ManyToOne
-    private Contact contact;
+    @JoinColumn(name = "contact_id")
+    private Utilisateur utilisateur;
 }

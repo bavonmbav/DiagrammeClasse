@@ -16,14 +16,9 @@ public class OpportuniteController {
     @Autowired
     private  OpportuniteServiceIT opportuniteService;
 
-    public OpportuniteController(OpportuniteServiceIT opportuniteService) {
-        this.opportuniteService = opportuniteService;
-    }
-
     @PostMapping
-    public ResponseEntity<Opportunite> creerOpportunite(@RequestBody OpportuniteDTO opportuniteDTO) {
-        Opportunite opportunite = opportuniteService.creerOpportunite(opportuniteDTO);
-        return ResponseEntity.ok(opportunite);
+    public void creerOpportunite(@RequestBody Opportunite opportuniteDTO) {
+         opportuniteService.creerOpportunite(opportuniteDTO);
     }
 
     @PutMapping("/{opportuniteId}/attribution/{membreId}")
@@ -36,10 +31,7 @@ public class OpportuniteController {
     }
 
     @PutMapping("/{opportuniteId}/note")
-    public ResponseEntity<Opportunite> ajouterNote(
-            @PathVariable Long opportuniteId,
-            @RequestBody String note
-    ) {
+    public ResponseEntity<Opportunite> ajouterNote(@PathVariable Long opportuniteId, @RequestBody String note) {
         Opportunite opportunite = opportuniteService.ajouterNote(opportuniteId, note);
         return ResponseEntity.ok(opportunite);
     }

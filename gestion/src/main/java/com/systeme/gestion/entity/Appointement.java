@@ -1,14 +1,14 @@
 package com.systeme.gestion.entity;
 
-import java.sql.Date;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+import java.time.LocalDateTime;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 @Entity
 @Builder
 @Data
@@ -18,8 +18,12 @@ public class Appointement {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    Date atdate ;
     String notes;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime timestamp;
+
     @ManyToOne
-    private Contact contact;
+    @JoinColumn(name = "contact_id")
+    private Utilisateur utilisateur;
 }

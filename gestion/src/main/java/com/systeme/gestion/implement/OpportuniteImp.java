@@ -19,15 +19,8 @@ public class OpportuniteImp implements OpportuniteServiceIT {
     private OpportuniteRepository opportuniteRepository;
     //opportuniteRepository.save(opportunite);
     @Override
-    public Opportunite creerOpportunite(OpportuniteDTO opportuniteDTO) {
-        Opportunite opportunite = new Opportunite();
-        opportunite.setTitre(opportuniteDTO.getTitre());
-        opportunite.setDescription(opportuniteDTO.getDescription());
-        opportunite.setMontant(opportuniteDTO.getMontant());
-        opportunite.setEtapeProgression(EtapeProgression.PROSPECTION);
-        opportunite.setEtat(EtatOpportunite.EN_COURS);
-
-        return opportuniteRepository.save(opportunite);
+    public void creerOpportunite(Opportunite opportuniteDTO) {
+        opportuniteRepository.save(opportuniteDTO);
     }
 
     @Override

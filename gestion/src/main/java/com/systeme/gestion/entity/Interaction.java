@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +21,7 @@ public class Interaction {
     private String  description;
     private String  notes;
     private String details;
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime timestamp;
     @ManyToOne
     @JoinColumn(name = "contact_id")
