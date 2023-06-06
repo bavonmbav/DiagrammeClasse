@@ -1,49 +1,82 @@
+application {
+  config {
+    baseName SystemeGestion,
+    applicationType monolith,
+    packageName com.system.gestion,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+    clientFramework angular
+  }
+  entities *
+}
+
 entity Contact {
-  firstName String,
-  lastName String,
+  
+  nom String,
   email String,
-  phone String,
-  company String
+  telephone String,
+  adresse String
+}
+
+entity Entreprise {
+  nom String
 }
 
 entity Interaction {
+  date Instant,
   type String,
-  date Instant,
-  description String,
-  notes String
+  details String
 }
 
-entity Opportunity {
-  name String,
-  stage String,
-  amount BigDecimal,
-  closingDate Instant
+entity Document {
+  nom String,
+  format String,
+  contenu Blob
 }
 
-entity Appointment {
-  date Instant,
-  notes String
+entity Opportunite {
+  nom String,
+  montant Double
 }
 
-entity Task {
-  title String,
-  description String,
-  dueDate Instant
+entity Etape {
+  nom String,
+  dateDebut Instant,
+  dateFin Instant,
+  statut String
 }
 
-entity User {
-  username String,
-  password String,
-  role String
+entity Utilisateur {
+  nom String,
+  email String,
+  motDePasse String
+}
+
+entity Rapport {
+  nom String
+}
+
+entity Analyse {
+  nom String
+}
+
+entity Outil {
+  nom String
 }
 
 relationship ManyToOne {
-  Interaction{contact} to Contact,
-  Opportunity{contact} to Contact,
-  Appointment{contact} to Contact
+  Contact{entreprise} to Entreprise
+  Interaction{contact} to Contact
+  Document{contact} to Contact
+  Opportunite{contact} to Contact
+  Etape{opportunite} to Opportunite
 }
 
-relationship ManyToOne {
-  Task{contact} to Contact
+relationship ManyToMany {
+  Utilisateur{contacts} to Contact{utilisateurs}
+  Utilisateur{opportunites} to Opportunite{utilisateurs}
+  Utilisateur{rapports} to Rapport{utilisateurs}
+  Utilisateur{analyses} to Analyse{utilisateurs}
+  Utilisateur{outils} to Outil{utilisateurs}
 }
 

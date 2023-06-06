@@ -27,7 +27,10 @@ public class RapportController {
 
     // Point d'entrée pour générer un rapport personnalisé
     @GetMapping("/rapports/personnalises")
-    public Rapport genererRapportPersonnalise(@RequestParam Criteres criteres) {
+    public Rapport genererRapportPersonnalise(@RequestParam(required = false) Criteres criteres) {
+        if (criteres == null){
+            return null;
+        }
         return rapportService.genererRapportPersonnalise(criteres);
     }
 }
